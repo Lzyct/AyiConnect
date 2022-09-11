@@ -22,6 +22,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   int _currentStep = 0;
+  int _maxTopSafeArea = 40;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,13 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Parent(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0),
-          child: AppBar(backgroundColor: Palette.primary, elevation: 0),
+          child: AppBar(
+            backgroundColor: Palette.primary,
+            elevation: 0,
+            systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
+              statusBarColor: Colors.transparent,
+            ),
+          ),
         ),
         child: _buildStepper(context),
       ),
@@ -41,7 +48,6 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   StepperCustom _buildStepper(BuildContext context) {
-    log.d("Test ${MediaQuery.of(context).viewPadding.top}");
     return StepperCustom(
       type: StepperCustomType.horizontal,
       currentStep: _currentStep,
@@ -49,7 +55,9 @@ class _RegisterPageState extends State<RegisterPage> {
       onStepContinue: _onStepContinue,
       onStepCancel: _onStepCancel,
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).viewPadding.top > 48 ? 0 : Dimens.space8,
+        top: MediaQuery.of(context).viewPadding.top > _maxTopSafeArea
+            ? 0
+            : Dimens.space8,
         bottom: Dimens.space16,
       ),
       controlsBuilder: (context, details) {
