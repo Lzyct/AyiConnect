@@ -2,36 +2,31 @@ import 'package:ayiconnect_test/domain/domain.dart';
 import 'package:equatable/equatable.dart';
 
 class RegisterResponse extends Equatable {
-  final int? id;
-  final String? token;
-  final String? error;
+  final String? placeId;
+  final String? description;
 
   const RegisterResponse({
-    this.id,
-    this.token,
-    this.error,
+    this.placeId,
+    this.description,
   });
 
   RegisterResponse.fromJson(dynamic json)
-      : id = json['id'] as int?,
-        token = json['token'] as String?,
-        error = json['error'] as String?;
+      : placeId = json['place_id'] as String?,
+        description = json['description'] as String?;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
-    map['token'] = token;
-    map['error'] = error;
+    map['place_id'] = placeId;
+    map['description'] = description;
 
     return map;
   }
 
-  Register toEntity() => const Register("", "");
+  Location toEntity() => Location(placeId: placeId, description: description);
 
   @override
   List<Object?> get props => [
-        id,
-        token,
-        error,
+        placeId,
+        description,
       ];
 }

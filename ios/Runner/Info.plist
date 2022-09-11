@@ -52,11 +52,11 @@
 	<key>NSMotionUsageDescription</key>
 	<string>NSMotionUsageDescription</string>
 	<key>NSLocationAlwaysUsageDescription </key>
-	<string>NSLocationAlwaysUsageDescription </string>
+	<string>Application need to get your location to show address name</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>NSSpeechRecognitionUsageDescription</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>NSLocationWhenInUseUsageDescription</string>
+	<string>Application need to get your location to show address name</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>

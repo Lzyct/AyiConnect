@@ -1,8 +1,12 @@
 import 'package:ayiconnect_test/core/core.dart';
 import 'package:ayiconnect_test/data/datasources/datasources.dart';
+import 'package:ayiconnect_test/di/di.dart';
+import 'package:ayiconnect_test/presentation/pages/register/cubit/cubit.dart';
 import 'package:ayiconnect_test/presentation/presentation.dart';
 import 'package:ayiconnect_test/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 part 'register_step1.dart';
@@ -45,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
       onStepContinue: _onStepContinue,
       onStepCancel: _onStepCancel,
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).viewPadding.top > 20 ? 0 : Dimens.space8,
+        top: MediaQuery.of(context).viewPadding.top > 48 ? 0 : Dimens.space8,
         bottom: Dimens.space16,
       ),
       controlsBuilder: (context, details) {
@@ -99,7 +103,10 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
           textAlign: TextAlign.center,
         ),
-        content: RegisterStep2(onNext: _onStepContinue),
+        content: BlocProvider(
+          create: (_) => sl<RegisterCubit>()..currentLocation(),
+          child: RegisterStep2(onNext: _onStepContinue),
+        ),
         isActive: _currentStep >= 1,
         state: _currentStep > 1
             ? StepStateCustom.complete

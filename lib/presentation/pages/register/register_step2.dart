@@ -11,6 +11,7 @@ class RegisterStep2 extends StatefulWidget {
 
 class _RegisterStep2State extends State<RegisterStep2> {
   final TextEditingController _conBirthday = TextEditingController();
+  final TextEditingController _conLocation = TextEditingController();
   late final List<DataHelper> _listGender = [
     DataHelper(id: 1, title: Strings.of(context)!.male),
     DataHelper(id: 2, title: Strings.of(context)!.female),
@@ -26,23 +27,31 @@ class _RegisterStep2State extends State<RegisterStep2> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildHeader(),
-        const SpacerV(),
-        Divider(color: Palette.divider, thickness: Dimens.space1),
-        const SpacerV(),
-        Divider(color: Palette.divider, thickness: Dimens.space1),
-        ..._buildForm(),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: Dimens.space16),
-          child: Button(
-            width: double.maxFinite,
-            title: Strings.of(context)!.next,
-            onPressed: () => widget.onNext.call(),
-          ),
-        )
-      ],
+    return BlocListener<RegisterCubit, RegisterState>(
+      listener: (_, state) {
+        log.d("State $state");
+        if (state.status == RegisterStatus.success) {
+          _conLocation.text = state.location?.description ?? "-";
+        }
+      },
+      child: Column(
+        children: [
+          _buildHeader(),
+          const SpacerV(),
+          Divider(color: Palette.divider, thickness: Dimens.space1),
+          const SpacerV(),
+          Divider(color: Palette.divider, thickness: Dimens.space1),
+          ..._buildForm(),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: Dimens.space16),
+            child: Button(
+              width: double.maxFinite,
+              title: Strings.of(context)!.next,
+              onPressed: () => widget.onNext.call(),
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -105,7 +114,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
         suffixIcon: const Icon(Icons.calendar_month_outlined),
         curFocusNode: DisableFocusNode(),
         onTap: () async {
-          final date = await context.birthdayPicker(
+          await context.birthdayPicker(
             title: Strings.of(context)!.chooseBirthdayTitle,
             initialDate: DateTime(
               DateTime.now().year - 10,
@@ -134,6 +143,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
         },
       ),
       TextF(
+        controller: _conLocation,
         hint: Strings.of(context)!.currentLocationTitle,
         hintText: Strings.of(context)!.currentLocationHint,
         suffixIcon: const Icon(Icons.arrow_drop_down_outlined),

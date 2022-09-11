@@ -1,5 +1,4 @@
-import 'package:ayiconnect_test/domain/domain.dart';
-import 'package:equatable/equatable.dart';
+part of 'register_cubit.dart';
 
 enum RegisterStatus {
   loading,
@@ -15,27 +14,27 @@ enum RegisterStatus {
 
 class RegisterState extends Equatable {
   final RegisterStatus status;
-  final Register? register;
+  final Location? location;
   final String? message;
 
   const RegisterState({
     this.status = RegisterStatus.loading,
-    this.register,
+    this.location,
     this.message,
   });
 
   RegisterState copyWith({
     RegisterStatus? status,
-    Register? register,
+    Location? location,
     String? message,
   }) {
     return RegisterState(
       status: status ?? this.status,
-      register: register ?? this.register,
+      location: location ?? this.location,
       message: message ?? this.message,
     );
   }
 
   @override
-  List<Object?> get props => [status, register, message];
+  List<Object?> get props => [status, location, message];
 }

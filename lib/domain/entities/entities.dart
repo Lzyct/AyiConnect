@@ -1,1 +1,1 @@
-export 'auth/auth.dart';
+export 'register/location.dart';

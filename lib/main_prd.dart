@@ -13,6 +13,13 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
+  /// Set status bar icon color
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.light.copyWith(
+      statusBarColor: Colors.transparent,
+    ),
+  );
+
   /// Set env as production
   environment = Environment.production;
 

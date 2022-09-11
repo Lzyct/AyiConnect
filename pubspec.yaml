@@ -61,10 +61,8 @@ dependencies:
   # Use as path reader for Android and iOS
   path_provider: ^2.0.11
 
-  # Use for request permission
-  permission_handler: ^10.0.0
-
   geolocator: ^9.0.1
+  geocoding: ^2.0.5
 
   # logger
   logger: ^1.1.0

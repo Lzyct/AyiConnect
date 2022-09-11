@@ -1,4 +1,5 @@
 import 'package:ayiconnect_test/data/data.dart';
+import 'package:ayiconnect_test/domain/domain.dart';
 import 'package:ayiconnect_test/presentation/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -17,9 +18,15 @@ Future<void> serviceLocator({bool isUnitTest = false}) async {
       initPrefManager(value);
     });
     sl.registerSingleton<DioClient>(DioClient(isUnitTest: true));
+    dataSources();
+    repositories();
+    useCases();
     cubit();
   } else {
     sl.registerSingleton<DioClient>(DioClient());
+    dataSources();
+    repositories();
+    useCases();
     cubit();
   }
 }
@@ -29,6 +36,24 @@ void initPrefManager(SharedPreferences initPrefManager) {
   sl.registerLazySingleton<PrefManager>(() => PrefManager(initPrefManager));
 }
 
+/// Register repositories
+void repositories() {
+  sl.registerLazySingleton<RegisterRepository>(
+      () => RegisterRepositoryImpl(sl()));
+}
+
+/// Register dataSources
+void dataSources() {
+  sl.registerLazySingleton<LocationRemoteDataSource>(
+    () => LocationRemoteDatasourceImpl(sl()),
+  );
+}
+
+void useCases() {
+  sl.registerLazySingleton(() => CurrentLocation(sl()));
+}
+
 void cubit() {
   sl.registerFactory(() => AppCubit());
+  sl.registerFactory(() => RegisterCubit(sl()));
 }
