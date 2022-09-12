@@ -169,6 +169,23 @@ class _RegisterStep2State extends State<RegisterStep2> {
         },
       ),
       TextF(
+        curFocusNode: DisableFocusNode(),
+        onTap: () async {
+          final LocationResult? result = await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => PlacePicker(
+                Constants.get.apiKey,
+              ),
+            ),
+          );
+          final List<Placemark> placeMarks = await placemarkFromCoordinates(
+            result?.latLng?.latitude ?? 0,
+            result?.latLng?.longitude ?? 0,
+          );
+          final Placemark placeMark = placeMarks[0];
+          _conLocation.text =
+              "${Platform.isAndroid ? placeMark.subAdministrativeArea : placeMark.locality}, ${placeMark.administrativeArea}, ${placeMark.country}";
+        },
         controller: _conLocation,
         hint: Strings.of(context)!.currentLocationTitle,
         hintText: Strings.of(context)!.currentLocationHint,
