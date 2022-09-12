@@ -183,8 +183,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
             result?.latLng?.longitude ?? 0,
           );
           final Placemark placeMark = placeMarks[0];
-          _conLocation.text =
-              "${Platform.isAndroid ? placeMark.subAdministrativeArea : placeMark.locality}, ${placeMark.administrativeArea}, ${placeMark.country}";
+          _conLocation.text = placeMark.toFormattedText();
         },
         controller: _conLocation,
         hint: Strings.of(context)!.currentLocationTitle,

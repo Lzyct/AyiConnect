@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:ayiconnect_test/core/core.dart';
 import 'package:ayiconnect_test/data/data.dart';
 import 'package:ayiconnect_test/domain/domain.dart';
+import 'package:ayiconnect_test/utils/ext/ext.dart';
 import 'package:dartz/dartz.dart';
 import 'package:geocoding/geocoding.dart' as geocoding;
 
@@ -20,12 +19,7 @@ class RegisterRepositoryImpl implements RegisterRepository {
           .placemarkFromCoordinates(location.latitude, location.longitude);
       final geocoding.Placemark placeMark = placeMarks[0];
 
-      return Right(
-        Location(
-          description:
-              "${Platform.isAndroid ? placeMark.subAdministrativeArea : placeMark.locality}, ${placeMark.administrativeArea}, ${placeMark.country}",
-        ),
-      );
+      return Right(Location(description: placeMark.toFormattedText()));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     }
