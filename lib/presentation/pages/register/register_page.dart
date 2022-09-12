@@ -1,7 +1,6 @@
 import 'package:ayiconnect_test/core/core.dart';
 import 'package:ayiconnect_test/data/datasources/datasources.dart';
 import 'package:ayiconnect_test/di/di.dart';
-import 'package:ayiconnect_test/presentation/pages/register/cubit/cubit.dart';
 import 'package:ayiconnect_test/presentation/presentation.dart';
 import 'package:ayiconnect_test/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -22,14 +21,19 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   int _currentStep = 0;
-  int _maxTopSafeArea = 40;
+  final int _maxTopSafeArea = 40;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        _onStepCancel();
-        return _currentStep == 0;
+        if (_currentStep == 0) {
+          return true;
+        } else {
+          _onStepCancel();
+        }
+
+        return false;
       },
       child: Parent(
         appBar: PreferredSize(
