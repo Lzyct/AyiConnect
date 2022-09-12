@@ -19,7 +19,7 @@ class RegisterRepositoryImpl implements RegisterRepository {
           .placemarkFromCoordinates(location.latitude, location.longitude);
       final geocoding.Placemark placeMark = placeMarks[0];
 
-      return Right(Location(description: placeMark.toFormattedText()));
+      return Right(Location(name: placeMark.toFormattedText()));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     }

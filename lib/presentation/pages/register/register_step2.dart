@@ -38,7 +38,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
             context.show();
             break;
           case RegisterStatus.success:
-            _conLocation.text = state.location?.description ?? "-";
+            _conLocation.text = state.location?.name ?? "-";
             context.dismiss();
             break;
           case RegisterStatus.failure:

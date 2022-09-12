@@ -1,11 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 class Location extends Equatable {
-  final String? placeId;
-  final String? description;
+  final String? name;
 
-  const Location({this.placeId, this.description});
+  const Location({this.name});
 
   @override
-  List<Object?> get props => [placeId, description];
+  List<Object?> get props => [name];
 }
