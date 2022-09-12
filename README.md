@@ -24,6 +24,7 @@ https://user-images.githubusercontent.com/1531684/189573510-0e1f300c-207d-47ff-8
 - Run `flutter run --flavor prd -t lib/main_prd.dart` for **production**
 - Run Test `flutter test`
 - To generate launcher icon based on Flavor `flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*`
+- To generate mock class `flutter pub run build_runner build`
 
 ## Architecture Proposal by [Resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)
 
@@ -61,9 +62,9 @@ lib
 │   │   ├── local
 │   │   │   ├── data_helper.dart
 │   │   │   ├── local.dart
-│   │   │   └── pref_manager.dart
+│   │   │   ├── pref_manager.dart
+│   │   │   └── register_local_datasources.dart
 │   │   └── remote
-│   │       ├── auth_remote_datasources.dart
 │   │       ├── model
 │   │       │   ├── auth
 │   │       │   │   └── auth.dart
@@ -153,7 +154,23 @@ lib
 <details>
 
 ````
- 
+test
+├── data
+│   ├── datasources
+│   │   └── local
+│   │       └── register_local_datasource_test.dart
+│   └── repositories
+│       └── register_repository_impl_test.dart
+├── helper
+│   ├── test_mock.dart
+│   └── test_mock.mocks.dart
+└── presentation
+    └── pages
+        └── register
+            ├── cubit
+            │   ├── register_cubit_test.dart
+            │   └── register_cubit_test.mocks.dart
+            └── register_page_test.dart
 ````
 
 </details>
