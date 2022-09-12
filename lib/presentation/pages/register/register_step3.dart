@@ -36,6 +36,7 @@ class _RegisterStep3State extends State<RegisterStep3> {
       child: Column(
         children: [
           TextF(
+            textFieldKey: const ValueKey("etOccupation"),
             hint: Strings.of(context)!.occupationTitle,
             hintText: Strings.of(context)!.occupationHint,
             validator: (String? value) => value != null
@@ -43,6 +44,7 @@ class _RegisterStep3State extends State<RegisterStep3> {
                 : null,
           ),
           TextF(
+            textFieldKey: const ValueKey("etCompany"),
             hint: Strings.of(context)!.companyTitle,
             hintText: Strings.of(context)!.companyHint,
             validator: (String? value) => value != null
@@ -50,6 +52,7 @@ class _RegisterStep3State extends State<RegisterStep3> {
                 : null,
           ),
           TextF(
+            textFieldKey: const ValueKey("etLanguage"),
             curFocusNode: DisableFocusNode(),
             controller: _conLanguage,
             onTap: () async {
@@ -96,6 +99,7 @@ class _RegisterStep3State extends State<RegisterStep3> {
             },
           ),
           TextF(
+            textFieldKey: const ValueKey("etAbout"),
             hint: Strings.of(context)!.aboutYouTitle,
             hintText: Strings.of(context)!.aboutYouHint,
             maxLength: 100,
@@ -107,6 +111,7 @@ class _RegisterStep3State extends State<RegisterStep3> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: Dimens.space30),
             child: Button(
+              buttonKey: const ValueKey("btnSubmit"),
               width: double.maxFinite,
               title: Strings.of(context)!.submit,
               onPressed: () {

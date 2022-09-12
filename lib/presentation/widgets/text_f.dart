@@ -35,6 +35,7 @@ class TextF extends StatefulWidget {
     this.prefix,
     this.borderRadius,
     this.maxLength,
+    this.textFieldKey,
   });
 
   final FocusNode? curFocusNode;
@@ -61,6 +62,7 @@ class TextF extends StatefulWidget {
   final Widget? prefix;
   final BorderRadius? borderRadius;
   final int? maxLength;
+  final Key? textFieldKey;
 
   @override
   _TextFState createState() => _TextFState();
@@ -91,7 +93,7 @@ class _TextFState extends State<TextF> {
             SpacerV(value: Dimens.space8),
           },
           TextFormField(
-            key: widget.key,
+            key: widget.textFieldKey,
             enabled: widget.enable,
             obscureText: widget.obscureText ?? false,
             focusNode: widget.curFocusNode,

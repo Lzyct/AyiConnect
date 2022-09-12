@@ -12,8 +12,15 @@ class RegisterRepositoryImpl implements RegisterRepository {
   const RegisterRepositoryImpl(this.registerLocalDatasource);
 
   @override
-  Future<Either<Failure, Location>> currentLocation() async {
+  Future<Either<Failure, Location>> currentLocation({
+    bool isUnitTest = false,
+  }) async {
     try {
+      if (isUnitTest) {
+        return const Right(
+          Location(name: "Makassar, Sulawesi Selatan, Indonesia"),
+        );
+      }
       final location = await registerLocalDatasource.currentLocation();
       final List<geocoding.Placemark> placeMarks = await geocoding
           .placemarkFromCoordinates(location.latitude, location.longitude);

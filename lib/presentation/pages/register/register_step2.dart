@@ -117,6 +117,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
   List<Widget> _buildForm() {
     return [
       TextF(
+        textFieldKey: const ValueKey("etFullName"),
         hint: Strings.of(context)!.fullNameTitle,
         hintText: Strings.of(context)!.fullNameHint,
         validator: (String? value) => value != null
@@ -131,6 +132,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
         },
       ),
       TextF(
+        textFieldKey: const ValueKey("etBirthday"),
         controller: _conBirthday,
         hint: Strings.of(context)!.chooseBirthdayTitle,
         hintText: Strings.of(context)!.chooseBirthdayHint,
@@ -169,6 +171,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
         },
       ),
       TextF(
+        textFieldKey: const ValueKey("etLocation"),
         curFocusNode: DisableFocusNode(),
         onTap: () async {
           final LocationResult? result = await Navigator.of(context).push(

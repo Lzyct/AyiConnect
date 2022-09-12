@@ -15,6 +15,7 @@ class Button extends StatelessWidget {
   final Color? titleColor;
   final double? fontSize;
   final Color? splashColor;
+  final Key? buttonKey;
 
   const Button({
     super.key,
@@ -25,6 +26,7 @@ class Button extends StatelessWidget {
     this.titleColor,
     this.fontSize,
     this.splashColor,
+    this.buttonKey,
   });
 
   @override
@@ -32,6 +34,7 @@ class Button extends StatelessWidget {
     return SizedBox(
       width: width,
       child: TextButton(
+        key: buttonKey,
         onPressed: onPressed,
         style: TextButton.styleFrom(
           backgroundColor: color ?? Palette.primary,

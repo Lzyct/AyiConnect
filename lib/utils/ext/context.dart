@@ -103,6 +103,7 @@ extension ContextExtensions on BuildContext {
                   ),
                 SpacerV(value: Dimens.space24),
                 Button(
+                  key: const ValueKey("btnChip"),
                   width: double.infinity,
                   title: Strings.of(this)!.submit,
                   onPressed: () {
