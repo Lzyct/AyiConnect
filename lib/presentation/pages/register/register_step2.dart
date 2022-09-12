@@ -11,7 +11,8 @@ class RegisterStep2 extends StatefulWidget {
 
 class _RegisterStep2State extends State<RegisterStep2> {
   final TextEditingController _conBirthday = TextEditingController();
-  final TextEditingController _conLocation = TextEditingController();
+  final TextEditingController _conLocation = TextEditingController(text: "-");
+
   late final List<DataHelper> _listGender = [
     DataHelper(id: 1, title: Strings.of(context)!.male),
     DataHelper(id: 2, title: Strings.of(context)!.female),
@@ -30,8 +31,18 @@ class _RegisterStep2State extends State<RegisterStep2> {
     return BlocListener<RegisterCubit, RegisterState>(
       listener: (_, state) {
         log.d("State $state");
-        if (state.status == RegisterStatus.success) {
-          _conLocation.text = state.location?.description ?? "-";
+        switch (state.status) {
+          case RegisterStatus.loading:
+            context.show();
+            break;
+          case RegisterStatus.success:
+            _conLocation.text = state.location?.description ?? "-";
+            context.dismiss();
+            break;
+          case RegisterStatus.failure:
+            context.dismiss();
+            state.message.toString().toToastError();
+            break;
         }
       },
       child: Column(

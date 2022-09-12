@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ayiconnect_test/core/core.dart';
 import 'package:ayiconnect_test/data/datasources/datasources.dart';
 import 'package:ayiconnect_test/presentation/presentation.dart';
@@ -184,5 +186,47 @@ extension ContextExtensions on BuildContext {
     final toDouble = percent / 100;
 
     return MediaQuery.of(this).size.height * toDouble;
+  }
+
+  //Start Loading Dialog
+  static late BuildContext ctx;
+
+  Future<void> show() => showDialog(
+        context: this,
+        barrierDismissible: false,
+        builder: (c) {
+          ctx = c;
+
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: Material(
+              color: Colors.transparent,
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Palette.white,
+                    borderRadius: BorderRadius.circular(Dimens.cornerRadius),
+                  ),
+                  margin: EdgeInsets.symmetric(horizontal: Dimens.space30),
+                  padding: EdgeInsets.all(Dimens.space24),
+                  child: Wrap(
+                    children: [
+                      if (Platform.isAndroid)
+                        const CircularProgressIndicator()
+                      else
+                        const CupertinoActivityIndicator()
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      );
+
+  void dismiss() {
+    try {
+      Navigator.pop(ctx);
+    } catch (_) {}
   }
 }
