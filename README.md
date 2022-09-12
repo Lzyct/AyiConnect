@@ -7,7 +7,7 @@ This is App for the purpose of the test.
 
 
 
-https://user-images.githubusercontent.com/1531684/189573002-8596be76-8e12-4e5f-87c6-e6c890174434.mp4?width=350
+https://user-images.githubusercontent.com/1531684/189573510-0e1f300c-207d-47ff-8d69-d28e91d09398.mp4?width=350
 
 
 ## Pre-requisites 📐
