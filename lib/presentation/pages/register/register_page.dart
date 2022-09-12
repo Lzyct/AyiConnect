@@ -22,6 +22,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   int _currentStep = 0;
   final int _maxTopSafeArea = 40;
+  bool _isLastPageComplete = false;
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +74,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _onStepContinue() {
     setState(() {
-      if (_currentStep <= _getSteps().length - 1) {
+      if (_currentStep < _getSteps().length - 1) {
         _currentStep++;
+      } else {
+        _isLastPageComplete = true;
       }
     });
   }
@@ -83,6 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {
       if (_currentStep > 0) {
         _currentStep--;
+        _isLastPageComplete = false;
       }
     });
   }
@@ -136,7 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         content: RegisterStep3(onNext: _onStepContinue),
         isActive: _currentStep >= 2,
-        state: _currentStep > 2
+        state: (_currentStep > 2 || _isLastPageComplete)
             ? StepStateCustom.complete
             : StepStateCustom.indexed,
       ),

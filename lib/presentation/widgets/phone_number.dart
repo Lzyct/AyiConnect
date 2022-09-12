@@ -94,7 +94,6 @@ class PhoneNumber extends StatelessWidget {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: Dimens.space4),
                     ),
-                    validator: (value) {},
                     onChanged: onPhoneNumberChange,
                     onTap: () {},
                   ),

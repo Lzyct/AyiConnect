@@ -13,6 +13,8 @@ class _RegisterStep2State extends State<RegisterStep2> {
   final TextEditingController _conBirthday = TextEditingController();
   final TextEditingController _conLocation = TextEditingController(text: "-");
 
+  final _keyForm = GlobalKey<FormState>();
+
   late final List<DataHelper> _listGender = [
     DataHelper(id: 1, title: Strings.of(context)!.male),
     DataHelper(id: 2, title: Strings.of(context)!.female),
@@ -45,23 +47,30 @@ class _RegisterStep2State extends State<RegisterStep2> {
             break;
         }
       },
-      child: Column(
-        children: [
-          _buildHeader(),
-          const SpacerV(),
-          Divider(color: Palette.divider, thickness: Dimens.space1),
-          const SpacerV(),
-          Divider(color: Palette.divider, thickness: Dimens.space1),
-          ..._buildForm(),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: Dimens.space16),
-            child: Button(
-              width: double.maxFinite,
-              title: Strings.of(context)!.next,
-              onPressed: () => widget.onNext.call(),
-            ),
-          )
-        ],
+      child: Form(
+        key: _keyForm,
+        child: Column(
+          children: [
+            _buildHeader(),
+            const SpacerV(),
+            Divider(color: Palette.divider, thickness: Dimens.space1),
+            const SpacerV(),
+            Divider(color: Palette.divider, thickness: Dimens.space1),
+            ..._buildForm(),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: Dimens.space16),
+              child: Button(
+                width: double.maxFinite,
+                title: Strings.of(context)!.next,
+                onPressed: () {
+                  if (_keyForm.currentState?.validate() ?? false) {
+                    widget.onNext.call();
+                  }
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -110,6 +119,9 @@ class _RegisterStep2State extends State<RegisterStep2> {
       TextF(
         hint: Strings.of(context)!.fullNameTitle,
         hintText: Strings.of(context)!.fullNameHint,
+        validator: (String? value) => value != null
+            ? (value.isEmpty ? Strings.of(context)!.errorEmpty : null)
+            : null,
       ),
       RadioGroup(
         label: Strings.of(context)!.selectGenderTitle,
@@ -141,6 +153,9 @@ class _RegisterStep2State extends State<RegisterStep2> {
             },
           );
         },
+        validator: (String? value) => value != null
+            ? (value.isEmpty ? Strings.of(context)!.errorEmpty : null)
+            : null,
       ),
       PhoneNumber(
         selectedPhoneCode: _selectedPhoneCode,
@@ -158,6 +173,9 @@ class _RegisterStep2State extends State<RegisterStep2> {
         hint: Strings.of(context)!.currentLocationTitle,
         hintText: Strings.of(context)!.currentLocationHint,
         suffixIcon: const Icon(Icons.arrow_drop_down_outlined),
+        validator: (String? value) => value != null
+            ? (value.isEmpty ? Strings.of(context)!.errorEmpty : null)
+            : null,
       ),
     ];
   }

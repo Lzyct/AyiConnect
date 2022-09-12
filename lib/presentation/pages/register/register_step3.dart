@@ -27,75 +27,97 @@ class _RegisterStep3State extends State<RegisterStep3> {
 
   final TextEditingController _conLanguage = TextEditingController();
 
+  final _keyForm = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextF(
-          hint: Strings.of(context)!.occupationTitle,
-          hintText: Strings.of(context)!.occupationHint,
-        ),
-        TextF(
-          hint: Strings.of(context)!.companyTitle,
-          hintText: Strings.of(context)!.companyHint,
-        ),
-        TextF(
-          curFocusNode: DisableFocusNode(),
-          controller: _conLanguage,
-          onTap: () async {
-            await context.chipPicker(
-              _listLanguage,
-              Strings.of(context)!.fluentSpokenHint,
-            );
-
-            _conLanguage.text = _listLanguage
-                .where((element) => element.isSelected)
-                .map((e) => e.title)
-                .join(", ");
-          },
-          hint: Strings.of(context)!.fluentSpokenTitle,
-          hintText: Strings.of(context)!.fluentSpokenHint,
-          suffixIcon: const Icon(Icons.add_circle_outline),
-        ),
-        DropDown(
-          hint: Strings.of(context)!.preferredServiceTitle,
-          value: _selectedPreferred,
-          items: _listPreferred
-              .map(
-                (e) => DropdownMenuItem(
-                  value: e,
-                  child: Text(
-                    e,
-                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          color: e == Strings.of(context)!.preferredServiceHint
-                              ? Palette.black60
-                              : null,
-                        ),
-                  ),
-                ),
-              )
-              .toList(),
-          onChanged: (value) {
-            if (value != null && value is String) {
-              _selectedPreferred = value;
-            }
-          },
-        ),
-        TextF(
-          hint: Strings.of(context)!.aboutYouTitle,
-          hintText: Strings.of(context)!.aboutYouHint,
-          maxLength: 100,
-          minLine: 5,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: Dimens.space30),
-          child: Button(
-            width: double.maxFinite,
-            title: Strings.of(context)!.submit,
-            onPressed: () {},
+    return Form(
+      key: _keyForm,
+      child: Column(
+        children: [
+          TextF(
+            hint: Strings.of(context)!.occupationTitle,
+            hintText: Strings.of(context)!.occupationHint,
+            validator: (String? value) => value != null
+                ? (value.isEmpty ? Strings.of(context)!.errorEmpty : null)
+                : null,
           ),
-        ),
-      ],
+          TextF(
+            hint: Strings.of(context)!.companyTitle,
+            hintText: Strings.of(context)!.companyHint,
+            validator: (String? value) => value != null
+                ? (value.isEmpty ? Strings.of(context)!.errorEmpty : null)
+                : null,
+          ),
+          TextF(
+            curFocusNode: DisableFocusNode(),
+            controller: _conLanguage,
+            onTap: () async {
+              await context.chipPicker(
+                _listLanguage,
+                Strings.of(context)!.fluentSpokenHint,
+              );
+
+              _conLanguage.text = _listLanguage
+                  .where((element) => element.isSelected)
+                  .map((e) => e.title)
+                  .join(", ");
+            },
+            hint: Strings.of(context)!.fluentSpokenTitle,
+            hintText: Strings.of(context)!.fluentSpokenHint,
+            suffixIcon: const Icon(Icons.add_circle_outline),
+            validator: (String? value) => value != null
+                ? (value.isEmpty ? Strings.of(context)!.errorEmpty : null)
+                : null,
+          ),
+          DropDown(
+            hint: Strings.of(context)!.preferredServiceTitle,
+            value: _selectedPreferred,
+            items: _listPreferred
+                .map(
+                  (e) => DropdownMenuItem(
+                    value: e,
+                    child: Text(
+                      e,
+                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                            color:
+                                e == Strings.of(context)!.preferredServiceHint
+                                    ? Palette.black60
+                                    : null,
+                          ),
+                    ),
+                  ),
+                )
+                .toList(),
+            onChanged: (value) {
+              if (value != null && value is String) {
+                _selectedPreferred = value;
+              }
+            },
+          ),
+          TextF(
+            hint: Strings.of(context)!.aboutYouTitle,
+            hintText: Strings.of(context)!.aboutYouHint,
+            maxLength: 100,
+            minLine: 5,
+            validator: (String? value) => value != null
+                ? (value.isEmpty ? Strings.of(context)!.errorEmpty : null)
+                : null,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: Dimens.space30),
+            child: Button(
+              width: double.maxFinite,
+              title: Strings.of(context)!.submit,
+              onPressed: () {
+                if (_keyForm.currentState?.validate() ?? false) {
+                  widget.onNext.call();
+                }
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

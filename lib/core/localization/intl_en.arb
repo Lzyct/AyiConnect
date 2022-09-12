@@ -42,5 +42,6 @@
   "aboutYouHint": "Provide some brief about yourself, so helper can get to know your a litle better before your connection.",
   "spanish": "Spanish",
   "mandarin": "Mandarin",
-  "english": "English"
+  "english": "English",
+  "errorEmpty": "Can't be empty"
 }
