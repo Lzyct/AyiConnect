@@ -1,12 +1,12 @@
 import 'package:ayiconnect_test/core/core.dart';
 import 'package:geolocator/geolocator.dart';
 
-abstract class LocationRemoteDataSource {
+abstract class RegisterLocalDataSource {
   Future<Position> currentLocation();
 }
 
-class LocationRemoteDatasourceImpl implements LocationRemoteDataSource {
-  LocationRemoteDatasourceImpl();
+class RegisterLocalDatasourceImpl implements RegisterLocalDataSource {
+  RegisterLocalDatasourceImpl();
 
   @override
   Future<Position> currentLocation() async {
@@ -39,7 +39,8 @@ class LocationRemoteDatasourceImpl implements LocationRemoteDataSource {
       if (permission == LocationPermission.deniedForever) {
         // Permissions are denied forever, handle appropriately.
         throw ServerException(
-            'Location permissions are permanently denied, we cannot request permissions.');
+          'Location permissions are permanently denied, we cannot request permissions.',
+        );
       }
 
       // When we reach here, permissions are granted and we can

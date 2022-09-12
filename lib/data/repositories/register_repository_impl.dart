@@ -7,14 +7,14 @@ import 'package:geocoding/geocoding.dart' as geocoding;
 
 class RegisterRepositoryImpl implements RegisterRepository {
   /// Data Source
-  final LocationRemoteDataSource authRemoteDatasource;
+  final RegisterLocalDataSource registerLocalDatasource;
 
-  const RegisterRepositoryImpl(this.authRemoteDatasource);
+  const RegisterRepositoryImpl(this.registerLocalDatasource);
 
   @override
   Future<Either<Failure, Location>> currentLocation() async {
     try {
-      final location = await authRemoteDatasource.currentLocation();
+      final location = await registerLocalDatasource.currentLocation();
       final List<geocoding.Placemark> placeMarks = await geocoding
           .placemarkFromCoordinates(location.latitude, location.longitude);
       final geocoding.Placemark placeMark = placeMarks[0];

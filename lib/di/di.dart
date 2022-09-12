@@ -43,8 +43,8 @@ void repositories() {
 
 /// Register dataSources
 void dataSources() {
-  sl.registerLazySingleton<LocationRemoteDataSource>(
-    () => LocationRemoteDatasourceImpl(),
+  sl.registerLazySingleton<RegisterLocalDataSource>(
+    () => RegisterLocalDatasourceImpl(),
   );
 }
 
