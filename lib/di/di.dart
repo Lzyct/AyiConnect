@@ -17,13 +17,11 @@ Future<void> serviceLocator({bool isUnitTest = false}) async {
     await SharedPreferences.getInstance().then((value) {
       initPrefManager(value);
     });
-    sl.registerSingleton<DioClient>(DioClient(isUnitTest: true));
     dataSources();
     repositories();
     useCases();
     cubit();
   } else {
-    sl.registerSingleton<DioClient>(DioClient());
     dataSources();
     repositories();
     useCases();
@@ -39,13 +37,14 @@ void initPrefManager(SharedPreferences initPrefManager) {
 /// Register repositories
 void repositories() {
   sl.registerLazySingleton<RegisterRepository>(
-      () => RegisterRepositoryImpl(sl()));
+    () => RegisterRepositoryImpl(sl()),
+  );
 }
 
 /// Register dataSources
 void dataSources() {
   sl.registerLazySingleton<LocationRemoteDataSource>(
-    () => LocationRemoteDatasourceImpl(sl()),
+    () => LocationRemoteDatasourceImpl(),
   );
 }
 

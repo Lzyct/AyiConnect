@@ -1,18 +1,12 @@
 import 'package:ayiconnect_test/core/core.dart';
-import 'package:ayiconnect_test/data/data.dart';
-import 'package:ayiconnect_test/domain/domain.dart';
 import 'package:geolocator/geolocator.dart';
 
 abstract class LocationRemoteDataSource {
-  Future<RegisterResponse> searchLocation(SearchLocationParams registerParams);
-
   Future<Position> currentLocation();
 }
 
 class LocationRemoteDatasourceImpl implements LocationRemoteDataSource {
-  final DioClient _client;
-
-  LocationRemoteDatasourceImpl(this._client);
+  LocationRemoteDatasourceImpl();
 
   @override
   Future<Position> currentLocation() async {
@@ -26,7 +20,7 @@ class LocationRemoteDatasourceImpl implements LocationRemoteDataSource {
         // Location services are not enabled don't continue
         // accessing the position and request users of the
         // App to enable the location services.
-        return Future.error('Location services are disabled.');
+        throw ServerException('Location services are disabled.');
       }
 
       permission = await Geolocator.checkPermission();
@@ -38,40 +32,19 @@ class LocationRemoteDatasourceImpl implements LocationRemoteDataSource {
           // Android's shouldShowRequestPermissionRationale
           // returned true. According to Android guidelines
           // your App should show an explanatory UI now.
-          return Future.error('Location permissions are denied');
+          throw ServerException('Location permissions are denied');
         }
       }
 
       if (permission == LocationPermission.deniedForever) {
         // Permissions are denied forever, handle appropriately.
-        return Future.error(
+        throw ServerException(
             'Location permissions are permanently denied, we cannot request permissions.');
       }
 
       // When we reach here, permissions are granted and we can
       // continue accessing the position of the device.
       return await Geolocator.getCurrentPosition();
-    } on ServerException catch (e) {
-      throw ServerException(e.message);
-    }
-  }
-
-  @override
-  Future<RegisterResponse> searchLocation(
-    SearchLocationParams registerParams,
-  ) async {
-    try {
-      final response = await _client.postRequest(
-        ListApi.register,
-        data: registerParams.toJson(),
-      );
-
-      final result = RegisterResponse.fromJson(response.data);
-      if (response.statusCode == 200) {
-        return result;
-      } else {
-        throw ServerException("Unknown error");
-      }
     } on ServerException catch (e) {
       throw ServerException(e.message);
     }

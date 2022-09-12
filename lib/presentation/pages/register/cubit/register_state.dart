@@ -16,25 +16,34 @@ class RegisterState extends Equatable {
   final RegisterStatus status;
   final Location? location;
   final String? message;
+  final List<Location>? locations;
 
   const RegisterState({
     this.status = RegisterStatus.loading,
     this.location,
     this.message,
+    this.locations,
   });
 
   RegisterState copyWith({
     RegisterStatus? status,
     Location? location,
     String? message,
+    List<Location>? locations,
   }) {
     return RegisterState(
       status: status ?? this.status,
       location: location ?? this.location,
       message: message ?? this.message,
+      locations: locations ?? this.locations,
     );
   }
 
   @override
-  List<Object?> get props => [status, location, message];
+  List<Object?> get props => [
+        status,
+        location,
+        message,
+        locations,
+      ];
 }

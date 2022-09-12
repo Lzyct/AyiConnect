@@ -36,9 +36,6 @@ dependencies:
   # Functional programming thingies
   dartz: ^0.10.1
 
-  # Use as Network Client
-  dio: ^4.0.6
-
   # Use as sharedPreferences to save local data
   shared_preferences: ^2.0.15
 
@@ -57,9 +54,6 @@ dependencies:
 
   # Use for responsive UI, set default size base on Mock Up
   flutter_screenutil: ^5.5.4
-
-  # Use as path reader for Android and iOS
-  path_provider: ^2.0.11
 
   geolocator: ^9.0.1
   geocoding: ^2.0.5

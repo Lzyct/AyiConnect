@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ayiconnect_test/core/core.dart';
 import 'package:ayiconnect_test/data/datasources/datasources.dart';
 import 'package:ayiconnect_test/di/di.dart';
@@ -7,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:place_picker/place_picker.dart';
 
 part 'register_step1.dart';
 part 'register_step2.dart';

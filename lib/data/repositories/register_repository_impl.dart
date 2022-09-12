@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ayiconnect_test/core/core.dart';
 import 'package:ayiconnect_test/data/data.dart';
 import 'package:ayiconnect_test/domain/domain.dart';
@@ -21,19 +23,11 @@ class RegisterRepositoryImpl implements RegisterRepository {
       return Right(
         Location(
           description:
-              "${placeMark.subAdministrativeArea}, ${placeMark.administrativeArea}, ${placeMark.country}",
+              "${Platform.isAndroid ? placeMark.subAdministrativeArea : placeMark.locality}, ${placeMark.administrativeArea}, ${placeMark.country}",
         ),
       );
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     }
-  }
-
-  @override
-  Future<Either<Failure, Location>> searchLocation(
-    SearchLocationParams registerParams,
-  ) {
-    // TODO: implement searchLocation
-    throw UnimplementedError();
   }
 }

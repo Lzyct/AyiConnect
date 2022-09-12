@@ -3,9 +3,5 @@ import 'package:ayiconnect_test/domain/domain.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class RegisterRepository {
-  Future<Either<Failure, Location>> searchLocation(
-    SearchLocationParams registerParams,
-  );
-
   Future<Either<Failure, Location>> currentLocation();
 }
