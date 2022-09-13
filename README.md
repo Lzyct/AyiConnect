@@ -10,6 +10,12 @@ This is App for the purpose of the test.
 https://user-images.githubusercontent.com/1531684/189573510-0e1f300c-207d-47ff-8d69-d28e91d09398.mp4?width=350
 
 
+
+https://user-images.githubusercontent.com/1531684/189823405-ed25ae5f-7108-4c11-b8dd-c0c2089ed327.mp4?width=300
+
+
+
+
 ## Pre-requisites 📐
 
 | Technology | Recommended Version | Installation Guide                                                    |
@@ -25,6 +31,11 @@ https://user-images.githubusercontent.com/1531684/189573510-0e1f300c-207d-47ff-8
 - Run Test `flutter test`
 - To generate launcher icon based on Flavor `flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*`
 - To generate mock class `flutter pub run build_runner build`
+
+## Known Issues 🐞
+
+- [Geocoding](https://pub.dev/packages/geocoding) library not support yet for **Flutter Web**
+- [Place Picker](https://pub.dev/packages/place_picker) library not support yet for **Flutter Web**
 
 ## Architecture Proposal by [Resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)
 
