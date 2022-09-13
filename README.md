@@ -26,6 +26,7 @@ https://user-images.githubusercontent.com/1531684/189823405-ed25ae5f-7108-4c11-b
 ## Get Started 🚀
 
 - Clone this project
+- Run `flutter pub get`
 - Run `flutter run --flavor stg -t lib/main_stg.dart` for **staging** or
 - Run `flutter run --flavor prd -t lib/main_prd.dart` for **production**
 - Run Test `flutter test`
