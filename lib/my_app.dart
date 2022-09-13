@@ -62,12 +62,11 @@ class MyApp extends StatelessWidget {
                       themeMode: data.activeTheme.mode,
                     );
                   },
-                  maximumSize: const Size(375, 667),
+                  maximumSize: const Size(428, 926),
                   // Maximum size
                   enabled: kIsWeb,
                   // default is enable, when disable content is full size
-                  backgroundColor:
-                      Colors.grey, // Background color/white space),
+                  backgroundColor: Palette.border,
                 ),
               ),
             )
