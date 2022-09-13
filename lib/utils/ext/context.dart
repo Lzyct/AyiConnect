@@ -79,6 +79,7 @@ extension ContextExtensions on BuildContext {
           builder: (context, setState) {
             return Wrap(
               spacing: Dimens.space8,
+              runSpacing: Dimens.space16,
               children: [
                 for (var data in listDataPicker)
                   FilterChip(

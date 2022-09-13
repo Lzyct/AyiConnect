@@ -1,5 +1,5 @@
+import 'package:ayiconnect_test/presentation/presentation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///*********************************************
 /// Created by ukietux on 11/09/20 with ♥
@@ -13,8 +13,13 @@ class Toast extends StatelessWidget {
   final Color? textColor;
   final String? message;
 
-  const Toast(
-      {super.key, this.icon, this.bgColor, this.message, this.textColor});
+  const Toast({
+    super.key,
+    this.icon,
+    this.bgColor,
+    this.message,
+    this.textColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +29,12 @@ class Toast extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: bgColor,
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(Dimens.space16),
           ),
-          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16),
+          padding: EdgeInsets.symmetric(
+            vertical: Dimens.space8,
+            horizontal: Dimens.space16,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -34,11 +42,9 @@ class Toast extends StatelessWidget {
                 icon,
                 color: textColor,
               ),
-              SizedBox(
-                width: 4.w,
-              ),
+              SizedBox(width: Dimens.space4),
               Container(
-                constraints: BoxConstraints(maxWidth: 250.w),
+                constraints: BoxConstraints(maxWidth: Dimens.maxWidthToast),
                 child: Text(
                   message!,
                   style: Theme.of(context)

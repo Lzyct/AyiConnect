@@ -1,6 +1,5 @@
 import 'package:ayiconnect_test/core/core.dart';
 import 'package:ayiconnect_test/di/di.dart';
-import 'package:ayiconnect_test/presentation/pages/pages.dart';
 import 'package:ayiconnect_test/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

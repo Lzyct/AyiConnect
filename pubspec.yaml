@@ -65,6 +65,8 @@ dependencies:
   # router
   go_router: ^4.4.1
 
+  flutter_web_frame: ^0.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

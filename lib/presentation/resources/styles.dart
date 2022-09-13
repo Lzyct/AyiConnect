@@ -34,7 +34,7 @@ ThemeData themeLight = ThemeData(
   brightness: Brightness.light,
   iconTheme: const IconThemeData(color: Palette.primary),
   unselectedWidgetColor: Palette.border,
-  visualDensity: VisualDensity.adaptivePlatformDensity,
+  visualDensity: VisualDensity.standard,
 );
 
 /// Dark theme

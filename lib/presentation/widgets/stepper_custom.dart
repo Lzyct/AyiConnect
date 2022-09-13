@@ -726,47 +726,49 @@ class _StepperCustomState extends State<StepperCustom>
   Widget _buildHorizontal() {
     final List<Widget> children = <Widget>[
       for (int i = 0; i < widget.steps.length; i += 1) ...<Widget>[
-        SizedBox(
-          width: Dimens.widthStepper,
-          child: InkResponse(
-            onTap: widget.steps[i].state != StepStateCustom.disabled
-                ? () {
-                    widget.onStepTapped?.call(i);
-                  }
-                : null,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    if (i == 0) Expanded(child: Container()),
-                    if (i != 0)
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(
-                            right: Dimens.space8,
+        Expanded(
+          child: SizedBox(
+            width: Dimens.widthStepper,
+            child: InkResponse(
+              onTap: widget.steps[i].state != StepStateCustom.disabled
+                  ? () {
+                      widget.onStepTapped?.call(i);
+                    }
+                  : null,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      if (i == 0) Expanded(child: Container()),
+                      if (i != 0)
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              right: Dimens.space8,
+                            ),
+                            height: 1.0,
+                            color: Colors.white,
                           ),
-                          height: 1.0,
-                          color: Colors.white,
                         ),
-                      ),
-                    _buildIcon(i),
-                    if (!_isLast(i))
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(
-                            left: Dimens.space8,
+                      _buildIcon(i),
+                      if (!_isLast(i))
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              left: Dimens.space8,
+                            ),
+                            height: 1.0,
+                            color: Colors.white,
                           ),
-                          height: 1.0,
-                          color: Colors.white,
                         ),
-                      ),
-                    if (_isLast(i)) Expanded(child: Container()),
-                  ],
-                ),
-                _buildHeaderText(i),
-              ],
+                      if (_isLast(i)) Expanded(child: Container()),
+                    ],
+                  ),
+                  _buildHeaderText(i),
+                ],
+              ),
             ),
           ),
         ),
